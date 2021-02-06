@@ -1,6 +1,10 @@
+using DynamicDashboardDemo.Extensions;
+using DynamicDashboardDemo.Models;
+using DynamicDashboardDemo.Utilities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -13,17 +17,20 @@ namespace DynamicDashboardDemo
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; }
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
-
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.ConfigureCors();
+            services.Configure<DatabaseSettings>(Configuration.GetSection("DatabaseInfo"));
+            services.AddDbContext<DynamicDashboardDemoContext>(opts => opts.UseSqlServer(Configuration.GetSection("DatabaseInfo").GetSection("SqlConnectionString").Value));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
