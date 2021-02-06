@@ -1,0 +1,84 @@
+﻿@{ ViewBag.E1Height = "220px";
+    ViewBag.DHeight = "250px"; }
+
+<style>
+    [class*='col-lg'], [class*='col-md'], [class*='col-sm'], [class*='col-xs'] {
+        padding-left: 15px;
+        padding-right: 0px;
+    }
+
+    .white-box {
+        padding: 15px;
+        margin-bottom: 15px;
+    }
+</style>
+
+<div class="row">
+    <div class="col-lg-12 place p-r-5" style="margin-top:20px" id="3">
+        <div class="white-box">
+            @{ string element3 = ViewData["Element3"].ToString(); await Html.RenderPartialAsync(element3); }
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-4 place" id="1">
+        <div class="white-box" style="height:300px;">
+            @{ string element1 = ViewData["Element1"].ToString(); await Html.RenderPartialAsync(element1); }
+        </div>
+    </div>
+    <div class="col-lg-4 place" id="2">
+        <div class="white-box" style="height:300px;">
+            @{ string element2 = ViewData["Element2"].ToString(); await Html.RenderPartialAsync(element2); }
+        </div>
+    </div>
+    <div class="col-lg-4 place p-r-5" id="4">
+        <div class="white-box" style="height:300px;">
+            @{ string element4 = ViewData["Element4"].ToString(); await Html.RenderPartialAsync(element4); }
+        </div>
+    </div>
+</div>
+
+<script>
+    $('.place').click(function(event) {
+        var place = $(this).attr('id');
+        localStorage.setItem("placement", place);
+        window.location = "/Dashboard/ElementList/"+'@ViewData["dashboardId"]';
+    });
+
+    function EnableDisableEditing() {
+        if ($("#editing-button").text() == "Enable Editing") {
+            localStorage.setItem("dashboard-editing", 1);
+            $("#editing-button").text("Done Editing");
+            $("#editing-message").text("* Dashboard Editing is Enabled, Click on Element to Update.");
+        }
+        else {
+            localStorage.setItem("dashboard-editing", 0);
+            $("#editing-button").text("Enable Editing");
+            $("#editing-message").text("* Enable Editing to Update Dashboard Elements");
+        }
+    }
+
+    function DeleteDashboard(){
+        $.ajax(
+        {
+            type: "POST",
+            url: '@Url.Action("DeleteDashboard", "Dashboard")',
+            data: {
+                dashboardId: '@ViewData["dashboardId"]'
+            },
+            error: function (result) {
+                alert(result);
+            },
+            success: function (result) {
+                if (result.status == true) {
+
+                    swal( "Done!", result.message, "success");
+                    window.location = result.default_dashboard;
+                }
+                else {
+                    swal("Problem!", result.message, "warning");
+                }
+            }
+        });
+    }
+</script>

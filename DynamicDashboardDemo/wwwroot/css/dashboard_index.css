@@ -1,0 +1,12 @@
+﻿#dashboard {
+    align: center;
+    width: auto;
+    padding-left: 60px;
+    padding-right: 60px;
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+#containerBlock {
+    height: 500px;
+}
