@@ -72,7 +72,7 @@ namespace DynamicDashboardDemo.DataAccessLayer
             try
             {
                 _context.DashboardLinkedWidgets.Add(widget);
-                return _context.SaveChanges() > 0 ? true : false;
+                return _context.SaveChanges() > 0;
             }
             catch (Exception ex)
             {
