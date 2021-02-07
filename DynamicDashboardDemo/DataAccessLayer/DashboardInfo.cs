@@ -47,6 +47,11 @@ namespace DynamicDashboardDemo.DataAccessLayer
             }
         }
 
+        public List<DashboardLinkedWidgets> GetLinkedWidgets(int Id)
+        {
+            return _context.DashboardLinkedWidgets.Where(x => x.DashboardId == Id).ToList();
+        }
+
         public string CreateDashboard(DashboardsInfo dashboard)
         {
             try
@@ -81,7 +86,7 @@ namespace DynamicDashboardDemo.DataAccessLayer
             try
             {
                 var oldWidgets = _context.DashboardLinkedWidgets.Where(x => x.DashboardId == widget.DashboardId && x.Placement == widget.Placement).ToList();
-                if(oldWidgets!=null)
+                if (oldWidgets != null)
                 {
                     oldWidgets.ForEach(x => _context.DashboardLinkedWidgets.Remove(x));
                     _context.SaveChanges();
