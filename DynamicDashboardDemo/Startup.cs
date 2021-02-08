@@ -29,6 +29,7 @@ namespace DynamicDashboardDemo
         {
             services.AddControllersWithViews();
             services.ConfigureCors();
+            services.ConfigureRepositories();
             services.Configure<DatabaseSettings>(Configuration.GetSection("DatabaseInfo"));
             services.AddDbContext<DynamicDashboardDemoContext>(opts => opts.UseSqlServer(Configuration.GetSection("DatabaseInfo").GetSection("SqlConnectionString").Value));
         }
@@ -57,7 +58,7 @@ namespace DynamicDashboardDemo
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Dashboard}/{action=Index}/{id?}");
             });
         }
     }

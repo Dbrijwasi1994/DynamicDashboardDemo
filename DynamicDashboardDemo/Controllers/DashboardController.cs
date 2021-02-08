@@ -57,5 +57,43 @@ namespace DynamicDashboardDemo.Controllers
                 return new EmptyResult();
             }
         }
+
+        public IActionResult WidgetList(int id)
+        {
+            ViewData["dashboardId"] = id;
+            return View("Widgets/WidgetList");
+        }
+
+        public ActionResult GetDashboardsList()
+        {
+            return Ok(_dashboardInfoRepository.GetDashboardInfo());
+        }
+
+        public string CreateDashboard(DashboardsInfo dashboard)
+        {
+            try
+            {
+                return _dashboardInfoRepository.CreateDashboard(dashboard);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                return "False";
+            }
+        }
+
+        public string AddWidget(DashboardLinkedWidgets widget)
+        {
+            try
+            {
+                _dashboardInfoRepository.RemoveWidgets(widget);
+                return _dashboardInfoRepository.AddWidget(widget).Equals(true) ? "True" : "False";
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                return ex.Message;
+            }
+        }
     }
 }

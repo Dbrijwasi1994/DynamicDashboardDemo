@@ -16,29 +16,29 @@
 <div class="row">
     <div class="col-lg-6 place m-t-15" id="1">
         <div class="white-box" style="height:300px;">
-            @{ string element1 = ViewData["Element1"].ToString(); await Html.RenderPartialAsync(element1); }
+            @{ string widget1 = ViewData["Widget1"].ToString(); await Html.RenderPartialAsync(widget1); }
         </div>
     </div>
     <div class="col-lg-6 place m-t-15 p-r-5" id="2">
         <div class="white-box" style="height:300px;">
-            @{ string element2 = ViewData["Element2"].ToString(); await Html.RenderPartialAsync(element2); }
+            @{ string widget2 = ViewData["Widget2"].ToString(); await Html.RenderPartialAsync(widget2); }
         </div>
     </div>
 </div>
 <div class="row">
     <div class="col-lg-4 place" id="3">
         <div class="white-box" style="height:300px;">
-            @{ string element3 = ViewData["Element3"].ToString(); await Html.RenderPartialAsync(element3); }
+            @{ string widget3 = ViewData["Widget3"].ToString(); await Html.RenderPartialAsync(widget3); }
         </div>
     </div>
     <div class="col-lg-4 place" id="4">
         <div class="white-box" style="height:300px;">
-            @{ string element4 = ViewData["Element4"].ToString(); await Html.RenderPartialAsync(element4); }
+            @{ string widget4 = ViewData["Widget4"].ToString(); await Html.RenderPartialAsync(widget4); }
         </div>
     </div>
     <div class="col-sm-4 place p-r-5" id="5">
         <div class="white-box" style="height:300px;">
-            @{ string element5 = ViewData["Element5"].ToString(); await Html.RenderPartialAsync(element5); }
+            @{ string widget5 = ViewData["Widget5"].ToString(); await Html.RenderPartialAsync(widget5); }
         </div>
     </div>
 </div>
@@ -47,7 +47,7 @@
     $('.place').click(function(event) {
         var place = $(this).attr('id');
         localStorage.setItem("placement", place);
-        window.location = "/Dashboard/ElementList/"+'@ViewData["dashboardId"]';
+        window.location = "/Dashboard/WidgetList/"+'@ViewData["dashboardId"]';
     });
 
     function EnableDisableEditing() {

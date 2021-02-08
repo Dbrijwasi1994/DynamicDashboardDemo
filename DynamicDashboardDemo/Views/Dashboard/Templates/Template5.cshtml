@@ -16,17 +16,17 @@
 <div class="row">
     <div class="col-lg-12 place p-r-10" style="margin-top:20px" id="3">
         <div class="white-box">
-            @{ string element3 = ViewData["Element3"].ToString(); await Html.RenderPartialAsync(element3); }
+            @{ string widget3 = ViewData["Widget3"].ToString(); await Html.RenderPartialAsync(widget3); }
         </div>
     </div>
     <div class="col-lg-6 place" id="1">
         <div class="white-box" style="height:300px;">
-            @{ string element1 = ViewData["Element1"].ToString(); await Html.RenderPartialAsync(element1); }
+            @{ string widget1 = ViewData["Widget1"].ToString(); await Html.RenderPartialAsync(widget1); }
         </div>
     </div>
     <div class="col-lg-6 place p-r-10" id="2">
         <div class="white-box" style="height:300px;">
-            @{ string element2 = ViewData["Element2"].ToString(); await Html.RenderPartialAsync(element2); }
+            @{ string widget2 = ViewData["Widget2"].ToString(); await Html.RenderPartialAsync(widget2); }
         </div>
     </div>
 </div>
@@ -35,7 +35,7 @@
     $('.place').click(function(event) {
         var place = $(this).attr('id');
         localStorage.setItem("placement", place);
-        window.location = "/Dashboard/ElementList/"+'@ViewData["dashboardId"]';
+        window.location = "/Dashboard/WidgetList/"+'@ViewData["dashboardId"]';
     });
 
     function EnableDisableEditing() {

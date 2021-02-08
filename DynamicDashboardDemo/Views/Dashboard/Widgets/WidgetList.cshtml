@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Dashboard Elements";
+    ViewBag.Title = "Dashboard Widgets";
 }
 
 <!-- Content Header (Page header) -->
@@ -75,7 +75,7 @@
             $.ajax(
             {
                 type: "POST",
-                url: '@Url.Action("AddElement", "Dashboard")',
+                url: '@Url.Action("AddWidget", "Dashboard")',
                 data: {
                     DashboardId: dashboardId,
                     ElementId: this.id,
@@ -86,7 +86,7 @@
                 },
                 success: function (result) {
                     if (result == "True") {
-                        window.location = "/Dashboard/Dashboard/"+dashboardId;
+                        window.location = "/Dashboard/ViewDashboard/"+dashboardId;
                     }
                     else {
                         alert("There is a Problem!");
