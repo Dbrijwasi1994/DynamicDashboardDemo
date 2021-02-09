@@ -113,19 +113,21 @@
             </div>
             <br><hr>
             <div align="right">
-                <button type="button" class="btn custom-btn waves-effect waves-light m-r-10" onclick="Next()">Next</button>
+                <button type="button" class="btn btn-success m-r-10" onclick="Next()">Next</button>
             </div>
         </div>
     </div>
 </section>
 
-<script> 
+<script>
+
     function Next(){
         $.ajax(
         {
             type: "POST",
-            url: '@Url.Action("Createdashboard", "Dashboard")',
+            url: '@Url.Action("CreateDashboard", "Dashboard")',
             data: {
+                Id: 1,
                 Name: localStorage.getItem("dashboard_name"),
                 TemplateId: $('input[type=radio][name=template]:checked').attr('id')
             },

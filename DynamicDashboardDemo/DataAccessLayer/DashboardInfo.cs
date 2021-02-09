@@ -1,10 +1,12 @@
 ﻿using DynamicDashboardDemo.Models;
 using DynamicDashboardDemo.Repositories;
+using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace DynamicDashboardDemo.DataAccessLayer
 {
@@ -54,10 +56,11 @@ namespace DynamicDashboardDemo.DataAccessLayer
 
         public string CreateDashboard(DashboardsInfo dashboard)
         {
+            string query = @"insert into Dashboards_Info(Name, TemplateId) values(@Name, @TemplateId)";
             try
             {
-                _context.DashboardsInfos.Add(dashboard);
-                _context.SaveChanges();
+                var sqlParamList = new object[] { new SqlParameter("@Name", dashboard.Name), new SqlParameter("@TemplateId", dashboard.TemplateId) };
+                _context.Database.ExecuteSqlRaw(query, sqlParamList);
                 return dashboard.Id.ToString();
             }
             catch (Exception ex)
@@ -69,10 +72,11 @@ namespace DynamicDashboardDemo.DataAccessLayer
 
         public bool AddWidget(DashboardLinkedWidgets widget)
         {
+            string query = @"insert into DashboardLinkedWidgets(DashboardId, WidgetId, Placement) values(@DashboardId, @WidgetId, @Placement)";
             try
             {
-                _context.DashboardLinkedWidgets.Add(widget);
-                return _context.SaveChanges() > 0;
+                var sqlParamList = new object[] { new SqlParameter("@DashboardId", widget.DashboardId), new SqlParameter("@WidgetId", widget.WidgetId), new SqlParameter("@Placement", widget.Placement) };
+                return _context.Database.ExecuteSqlRaw(query, sqlParamList) > 0;
             }
             catch (Exception ex)
             {

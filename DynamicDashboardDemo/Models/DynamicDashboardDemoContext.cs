@@ -42,6 +42,7 @@ namespace DynamicDashboardDemo.Models
 
             modelBuilder.Entity<DashboardLinkedWidgets>(entity =>
             {
+                entity.HasKey(e => e.Id);
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.Placement)
@@ -52,8 +53,7 @@ namespace DynamicDashboardDemo.Models
 
             modelBuilder.Entity<DashboardsInfo>(entity =>
             {
-                entity.HasNoKey();
-
+                entity.HasKey(e => e.Id);
                 entity.ToTable("Dashboards_Info");
 
                 entity.Property(e => e.Name)

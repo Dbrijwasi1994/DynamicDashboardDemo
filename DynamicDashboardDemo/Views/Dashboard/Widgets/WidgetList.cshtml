@@ -14,7 +14,7 @@
             <div class="row">
                 <!-- Widget1 -->
                 <div class="col-md-6 col-lg-6 col-xs-12">
-                    <button type="button" onclick="" class="btn custom-btn waves-effect waves-light m-b-10 pull-right" id="1">Add</button>
+                    <button type="button" class="btn btn-info m-b-10 pull-right" id="1">Add</button>
                     <div class="white-box" style="width: 400px; height: 300px">
                         <div class="white-box" style="height:350px; width:100%; padding-left:0px; padding-right:0px; padding-bottom:0px;">
                             @{ await Html.RenderPartialAsync("Widget1.cshtml"); }
@@ -23,7 +23,7 @@
                 </div>
                 <!-- Widget2 -->
                 <div class="col-md-6 col-lg-6 col-xs-12">
-                    <button type="button" onclick="" class="btn custom-btn waves-effect waves-light m-b-10 pull-right" id="2">Add</button>
+                    <button type="button" class="btn btn-info m-b-10 pull-right" id="2">Add</button>
                     <div class="white-box" style="width: 400px; height: 300px">
                         <div class="white-box" style="height:350px; width:100%; padding-left:0px; padding-right:0px; padding-bottom:0px;">
                             @{ await Html.RenderPartialAsync("Widget2.cshtml"); }
@@ -35,7 +35,7 @@
             <div class="row">
                 <!-- Widget3 -->
                 <div class="col-md-6 col-lg-6 col-xs-12">
-                    <button type="button" onclick="" class="btn custom-btn waves-effect waves-light m-b-10 pull-right" id="3">Add</button>
+                    <button type="button" class="btn btn-info m-b-10 pull-right" id="3">Add</button>
                     <div class="white-box" style="width: 400px; height: 300px">
                         <div class="white-box" style="height:350px; width:100%; padding-left:0px; padding-right:0px; padding-bottom:0px;">
                             @{ await Html.RenderPartialAsync("Widget3.cshtml"); }
@@ -44,7 +44,7 @@
                 </div>
                 <!-- Widget4 -->
                 <div class="col-md-6 col-lg-6 col-xs-12">
-                    <button type="button" onclick="" class="btn custom-btn waves-effect waves-light m-b-10 pull-right" id="4">Add</button>
+                    <button type="button" class="btn btn-info m-b-10 pull-right" id="4">Add</button>
                     <div class="white-box" style="width: 400px; height: 300px">
                         <div class="white-box" style="height:350px; width:100%; padding-left:0px; padding-right:0px; padding-bottom:0px;">
                             <br>@{ await Html.RenderPartialAsync("Widget4.cshtml"); }
@@ -56,7 +56,7 @@
             <div class="row">
                 <!-- Widget5 -->
                 <div class="col-md-12 col-lg-12 col-xs-12">
-                    <button type="button" onclick="" class="btn custom-btn waves-effect waves-light pull-right" id="5">Add</button>
+                    <button type="button" class="btn btn-info pull-right" id="5">Add</button>
                     <div class="white-box" style="height: 300px">
                         <div class="white-box" style="height:350px; width:100%; padding-left:0px; padding-right:0px; padding-bottom:0px;">
                             <br>@{ await Html.RenderPartialAsync("Widget5.cshtml"); }
@@ -70,7 +70,7 @@
 
 <script>
     $(function() {
-        $('button.button').on('click', function(e){
+        $('button.btn').on('click', function(e){
             var dashboardId = '@ViewData["dashboardId"]';
             $.ajax(
             {
@@ -78,7 +78,7 @@
                 url: '@Url.Action("AddWidget", "Dashboard")',
                 data: {
                     DashboardId: dashboardId,
-                    ElementId: this.id,
+                    WidgetId: this.id,
                     Placement: localStorage.getItem("placement")
                 },
                 error: function (result) {

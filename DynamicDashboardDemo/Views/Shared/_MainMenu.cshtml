@@ -109,7 +109,7 @@
                 alert(err);
             },
             success: function (result) {
-                var dashboardMenu = null;
+                var dashboardMenu = '';
                 $.each(result, function (key, value) {
                     dashboardMenu += '<li class="nav-item"><a class="nav-link" href="/Dashboard/ViewDashboard/' + value.id + '"><i class="far fa-circle nav-icon"></i>' + value.name +'</a></li>';
                 });
