@@ -27,6 +27,7 @@ namespace DynamicDashboardDemo.Models
         public virtual DbSet<DashboardsInfo> DashboardsInfos { get; set; }
         public virtual DbSet<Template> Templates { get; set; }
         public virtual DbSet<Widget> Widgets { get; set; }
+        public virtual DbSet<UserDetails> UserDetails { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

@@ -1,4 +1,5 @@
-﻿using DynamicDashboardDemo.DataAccessLayer;
+﻿using DNTCaptcha.Core;
+using DynamicDashboardDemo.DataAccessLayer;
 using DynamicDashboardDemo.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -22,6 +23,12 @@ namespace DynamicDashboardDemo.Extensions
         public static void ConfigureRepositories(this IServiceCollection services)
         {
             services.AddScoped<IDashboardInfoRepo, DashboardInfo>();
+            services.AddScoped<ILoginInfoRepo, LoginInfo>();
+        }
+
+        public static void AddCaptcha(this IServiceCollection services)
+        {
+            services.AddDNTCaptcha(options => options.UseCookieStorageProvider().ShowThousandsSeparators(false));
         }
     }
 }

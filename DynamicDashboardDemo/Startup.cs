@@ -1,4 +1,5 @@
 using DynamicDashboardDemo.Extensions;
+using DynamicDashboardDemo.Middlewares;
 using DynamicDashboardDemo.Models;
 using DynamicDashboardDemo.Utilities;
 using Microsoft.AspNetCore.Builder;
@@ -28,6 +29,7 @@ namespace DynamicDashboardDemo
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddCaptcha();
             services.ConfigureCors();
             services.ConfigureRepositories();
             services.Configure<DatabaseSettings>(Configuration.GetSection("DatabaseInfo"));
@@ -47,6 +49,9 @@ namespace DynamicDashboardDemo
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            app.UseMiddleware<ResponseEditingMiddleware>();
+            app.UseMiddleware<RequestEditingMiddleware>();
+            app.UseMiddleware<DisallowFirefoxMiddleware>();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
@@ -58,7 +63,7 @@ namespace DynamicDashboardDemo
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Dashboard}/{action=Index}/{id?}");
+                    pattern: "{controller=Login}/{action=Index}/{id?}");
             });
         }
     }
