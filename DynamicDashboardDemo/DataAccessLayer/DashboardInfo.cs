@@ -60,7 +60,9 @@ namespace DynamicDashboardDemo.DataAccessLayer
             try
             {
                 var sqlParamList = new object[] { new SqlParameter("@Name", dashboard.Name), new SqlParameter("@TemplateId", dashboard.TemplateId) };
-                _context.Database.ExecuteSqlRaw(query, sqlParamList);
+                int count = _context.Database.ExecuteSqlRaw(query, sqlParamList);
+                if (count > 0)
+                    dashboard = _context.DashboardsInfos.Where(x => x.Name.Equals(dashboard.Name)).FirstOrDefault();
                 return dashboard.Id.ToString();
             }
             catch (Exception ex)
